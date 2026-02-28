@@ -10,12 +10,22 @@ class AuthController extends Controller
 
     public function register()
     {
+        // If already logged in, redirect to dashboard
+        if (Session::isLoggedIn()) {
+            if ($_SESSION['user_role'] === 'admin') {
+                redirect('/admin/index');
+            } elseif ($_SESSION['user_role'] === 'instructor') {
+                redirect('/instructor/dashboard');
+            } else {
+                redirect('/student/dashboard');
+            }
+        }
+
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Process form
 
-            // Sanitize POST data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            // $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); // Deprecated in PHP 8.1
 
             // Init data
             $data = [
@@ -72,7 +82,7 @@ class AuthController extends Controller
 
                 // Register User
                 if ($this->userModel->register($data)) {
-                    Session::flash('register_success', 'تم التسجيل بنجاح! يمكنك تسجيل الدخول الآن وابتداء الرحلة يا نينجا.');
+                    Session::flash('register_success', 'تم التسجيل بنجاح! يمكنك تسجيل الدخول الآن وبدء الرحلة أيها الفارس.');
                     redirect('/auth/login');
                 } else {
                     die('Something went wrong');
@@ -101,12 +111,20 @@ class AuthController extends Controller
 
     public function login()
     {
+        // If already logged in, redirect to dashboard
+        if (Session::isLoggedIn()) {
+            if ($_SESSION['user_role'] === 'instructor' || $_SESSION['user_role'] === 'admin') {
+                redirect('/instructor/dashboard');
+            } else {
+                redirect('/student/dashboard');
+            }
+        }
+
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Process form
 
-            // Sanitize POST data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            // $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); // Deprecated in PHP 8.1
 
             // Init data
             $data = [
@@ -174,7 +192,9 @@ class AuthController extends Controller
         $_SESSION['user_xp'] = $user->total_xp;
 
         // Redirect based on role
-        if ($user->role == 'instructor' || $user->role == 'admin') {
+        if ($user->role == 'admin') {
+            redirect('/admin/index');
+        } elseif ($user->role == 'instructor') {
             redirect('/instructor/dashboard');
         } else {
             redirect('/student/dashboard');

@@ -14,20 +14,21 @@ class InstructorController extends Controller
 
     public function dashboard()
     {
-        // Mock data for analytics
+        // Load the instructor model for analytics
+        $instructorModel = $this->model('Instructor');
+
+        // Fetch real data from the database
+        $stats = $instructorModel->getDashboardStats();
+        $strugglingExercises = $instructorModel->getStrugglingExercises(5);
+        $recentSubmissions = $instructorModel->getRecentSubmissions(10);
+        $topStudents = $instructorModel->getTopStudents(5);
+
         $data = [
-            'title' => 'Instructor Analytics Dashboard',
-            'students_count' => 120,
-            'average_score' => 78,
-            'struggling_concepts' => [
-                ['name' => 'Nested Loops', 'failure_rate' => '40%'],
-                ['name' => 'Pointers', 'failure_rate' => '65%'],
-                ['name' => 'Array Out of Bounds', 'failure_rate' => '30%']
-            ],
-            'recent_submissions' => [
-                ['student' => 'Ahmed', 'exercise' => 'تحدي جمع الطاقات', 'score' => 80, 'status' => 'passed'],
-                ['student' => 'Sara', 'exercise' => 'وحوش التكرار', 'score' => 55, 'status' => 'failed']
-            ]
+            'title' => 'لوحة أوامر المدرب (السينسي)',
+            'stats' => $stats,
+            'struggling_exercises' => $strugglingExercises,
+            'recent_submissions' => $recentSubmissions,
+            'top_students' => $topStudents
         ];
 
         $this->view('layouts/header', $data);

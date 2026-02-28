@@ -9,10 +9,10 @@
     <div class="w-full bg-cardDark border-b border-borderCode px-4 py-2 flex justify-between items-center text-sm shadow-md z-10 flex-shrink-0">
         <div class="flex items-center gap-3">
             <a href="<?= URLROOT ?>/student/dashboard" class="text-textSecondary hover:text-white transition-colors flex items-center gap-1 group bg-[#21262d] px-3 py-1 rounded-md border border-borderCode hover:border-textSecondary">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 <?php echo $_SESSION['lang'] == 'ar' ? 'rotate-180' : ''; ?> group-hover:<?php echo $_SESSION['lang'] == 'ar' ? 'translate-x-1' : '-translate-x-1'; ?> transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                عودة
+                <?= __('back') ?>
             </a>
             <span class="text-gray-500 font-bold">/</span>
             <span class="text-brandPurple font-semibold flex items-center gap-2">
@@ -34,13 +34,13 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Run Code
+                <?= __('run_code') ?>
             </button>
             <button class="bg-brandGreen hover:bg-[#2ea043] text-white px-4 h-8 rounded-md font-semibold transition-colors shadow-lg shadow-brandGreen/20 flex items-center gap-2" id="submitBtn" onclick="submitToAI()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                Submit
+                <?= __('submit') ?>
             </button>
         </div>
     </div>
@@ -53,7 +53,7 @@
             <div class="p-6">
                 <div class="flex items-center gap-2 mb-6 text-xl">
                     <span class="bg-brandYellow/10 text-brandYellow p-1 rounded">📝</span>
-                    <h2 class="font-bold text-white m-0">المشكلة (Problem)</h2>
+                    <h2 class="font-bold text-white m-0"><?= __('problem') ?></h2>
                 </div>
 
                 <div class="prose prose-invert max-w-none text-textPrimary leading-relaxed mb-8">
@@ -64,16 +64,16 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    مثال (Example)
+                    <?= __('example') ?>
                 </h3>
                 <div class="bg-[#010409] border border-borderCode rounded-lg overflow-hidden mb-6">
                     <div class="grid grid-cols-2 text-sm">
                         <div class="p-3 border-l border-[#30363d]">
-                            <div class="text-textSecondary font-bold mb-2">Input</div>
+                            <div class="text-textSecondary font-bold mb-2"><?= __('input') ?></div>
                             <pre class="font-mono text-gray-300 m-0 leading-tight">10 20 30 40 50</pre>
                         </div>
                         <div class="p-3">
-                            <div class="text-textSecondary font-bold mb-2">Expected Output</div>
+                            <div class="text-textSecondary font-bold mb-2"><?= __('expected_output') ?></div>
                             <pre class="font-mono text-brandGreen m-0 leading-tight">150</pre>
                         </div>
                     </div>
@@ -83,19 +83,19 @@
                 <div id="aiFeedbackBox" class="hidden relative mt-8 pt-6 border-t border-borderCode">
                     <div class="absolute -top-3 right-4 bg-bgDark px-2">
                         <span class="flex items-center gap-1 text-sm font-bold text-brandPurple bg-brandPurple/10 px-2 py-0.5 rounded border border-brandPurple/20">
-                            🌟 المحلل الذكي الـ AI
+                            <?= __('ai_analyst') ?>
                         </span>
                     </div>
                     <div class="bg-[#161b22] border border-brandPurple/30 rounded-lg p-5 shadow-lg shadow-brandPurple/5">
                         <p id="aiGeneralText" class="text-white m-0 leading-relaxed"></p>
 
                         <div class="mt-4 bg-brandYellow/10 border-r-4 border-brandYellow p-3 rounded text-sm text-gray-300">
-                            <strong class="text-brandYellow mb-1 block">💡 تلميح:</strong>
+                            <strong class="text-brandYellow mb-1 block"><?= __('hint_label') ?></strong>
                             <span id="aiHintText"></span>
                         </div>
 
                         <div class="mt-4 flex items-center justify-between">
-                            <span class="text-gray-400 text-sm">الدرجة المحتسبة:</span>
+                            <span class="text-gray-400 text-sm"><?= __('earned_score') ?></span>
                             <span class="text-2xl font-black" id="aiScoreLabel"></span>
                         </div>
                     </div>
@@ -127,12 +127,12 @@
             <!-- Bottom I/O Panel -->
             <div class="border-t border-borderCode bg-bgDark flex-shrink-0 h-[25vh] flex flex-col">
                 <div class="flex text-xs font-bold text-gray-400 bg-[#161b22] border-b border-borderCode">
-                    <button id="tabCustomInput" class="px-4 py-2 border-b-2 border-brandPurple text-brandPurple bg-bgDark h-full flex items-center gap-1" onclick="switchIoTab('input')">Custom Input</button>
-                    <button id="tabOutput" class="px-4 py-2 hover:bg-bgDark transition-colors h-full flex items-center gap-1" onclick="switchIoTab('output')">Output</button>
+                    <button id="tabCustomInput" class="px-4 py-2 border-b-2 border-brandPurple text-brandPurple bg-bgDark h-full flex items-center gap-1" onclick="switchIoTab('input')"><?= __('custom_input') ?></button>
+                    <button id="tabOutput" class="px-4 py-2 hover:bg-bgDark transition-colors h-full flex items-center gap-1" onclick="switchIoTab('output')"><?= __('output') ?></button>
                 </div>
                 <div class="flex-1 bg-[#0d1117] relative">
-                    <textarea id="customInput" class="absolute inset-0 w-full h-full bg-transparent border-none text-gray-300 font-mono text-sm p-3 outline-none resize-none placeholder-gray-600" dir="ltr" placeholder="Enter custom input here..."></textarea>
-                    <textarea id="outputConsole" class="absolute inset-0 w-full h-full bg-transparent border-none text-gray-300 font-mono text-sm p-3 outline-none resize-none placeholder-gray-600 hidden" dir="ltr" readonly placeholder="Output will appear here..."></textarea>
+                    <textarea id="customInput" class="absolute inset-0 w-full h-full bg-transparent border-none text-gray-300 font-mono text-sm p-3 outline-none resize-none placeholder-gray-600" dir="ltr" placeholder="<?= __('enter_input_placeholder') ?>"></textarea>
+                    <textarea id="outputConsole" class="absolute inset-0 w-full h-full bg-transparent border-none text-gray-300 font-mono text-sm p-3 outline-none resize-none placeholder-gray-600 hidden" dir="ltr" readonly placeholder="<?= __('output_placeholder') ?>"></textarea>
                 </div>
             </div>
 
@@ -244,7 +244,7 @@
         const outputConsole = document.getElementById('outputConsole');
 
         // UI Change to compiling state
-        runBtn.innerHTML = `<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-brandYellow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg> Running...`;
+        runBtn.innerHTML = `<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-brandYellow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg> <?= __('running') ?>`;
         runBtn.disabled = true;
         switchIoTab('output');
 
@@ -302,30 +302,60 @@
         // Push back to textarea
         document.getElementById('codeEditor').value = code;
 
-        btn.innerHTML = `<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg> Analyzing...`;
+        btn.innerHTML = `<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg> <?= __('analyzing') ?>`;
         btn.disabled = true;
         btn.classList.add('opacity-75', 'cursor-not-allowed');
 
-        // Simulate AI Server Response
-        setTimeout(() => {
-            const aiResponse = {
-                score: 80,
-                general_feedback: "عمل رائع يا بطل! يبدو أن الحلقة التكرارية تدور مرة زائدة عن المطلوب.",
-                hint: "راجع شرط إيقاف الحلقة (i <= 5). الدورة تبدأ من 1 وتنتهي عند 6 حالياً!"
-            };
+        // Make real API request to Backend
+        fetch('<?= URLROOT ?>/student/submit_exercise', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    exercise_id: <?= $exercise['id'] ?>,
+                    code: code
+                })
+            })
+            .then(response => response.json())
+            .then(aiResponse => {
+                if (aiResponse.error) {
+                    alert(aiResponse.error);
+                    return;
+                }
 
-            document.getElementById('aiGeneralText').innerText = aiResponse.general_feedback;
-            document.getElementById('aiHintText').innerText = aiResponse.hint;
+                document.getElementById('aiGeneralText').innerText = aiResponse.general_feedback;
+                document.getElementById('aiHintText').innerText = aiResponse.hint || "<?= __('no_hints') ?>";
 
-            const scoreLabel = document.getElementById('aiScoreLabel');
-            scoreLabel.innerText = aiResponse.score + "%";
-            scoreLabel.className = 'text-2xl font-black ' + (aiResponse.score >= 70 ? 'text-brandGreen' : 'text-brandYellow');
+                const scoreLabel = document.getElementById('aiScoreLabel');
+                scoreLabel.innerText = aiResponse.score + "%";
+                scoreLabel.className = 'text-2xl font-black ' + (aiResponse.status === 'passed' ? 'text-brandGreen' : 'text-brandYellow');
 
-            fbBox.classList.remove('hidden');
+                // If passed and rewarded XP, show notification
+                if (aiResponse.xp_awarded > 0) {
+                    let xpMsg = "<?= __('xp_earned_msg') ?>".replace(':xp', aiResponse.xp_awarded);
+                    document.getElementById('aiGeneralText').innerHTML += `<br><br><span class="text-brandGreen font-bold">${xpMsg}</span>`;
+                    // Try updating header XP visually if it exists
+                    const xpSpan = document.querySelector('header .relative.z-10');
+                    if (xpSpan && xpSpan.innerText.includes('XP')) {
+                        xpSpan.innerText = '⭐ ' + aiResponse.new_total_xp + ' XP';
+                        xpSpan.classList.add('text-brandYellow', 'scale-110');
+                        setTimeout(() => xpSpan.classList.remove('text-brandYellow', 'scale-110'), 1000);
+                    }
+                }
 
-            btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Submit Again`;
-            btn.disabled = false;
-            btn.classList.remove('opacity-75', 'cursor-not-allowed');
-        }, 1500);
+                fbBox.classList.remove('hidden');
+
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> <?= __('submit_again') ?>`;
+                btn.disabled = false;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Error connecting to server.");
+                btn.innerHTML = "<?= __('re_attempt') ?>";
+                btn.disabled = false;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+            });
     }
 </script>

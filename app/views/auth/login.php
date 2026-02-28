@@ -7,15 +7,15 @@
 
     <div class="relative z-10">
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-white mb-2">أهلاً بعودتك! ⛩️</h1>
-            <p class="text-textSecondary">قم بتسجيل الدخول بأوراق الاعتماد للوصول لساحة التدريب</p>
+            <h1 class="text-3xl font-bold text-white mb-2"><?= __('login_welcome') ?></h1>
+            <p class="text-textSecondary"><?= __('login_subtitle') ?></p>
         </div>
 
         <?php Session::flash('register_success'); ?>
 
         <form action="<?= URLROOT; ?>/auth/login" method="POST">
             <div class="mb-5">
-                <label class="block text-textSecondary font-bold mb-2">البريد الإلكتروني</label>
+                <label class="block text-textSecondary font-bold mb-2"><?= __('email_label') ?></label>
                 <div class="relative">
                     <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -23,13 +23,13 @@
                             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                         </svg>
                     </div>
-                    <input type="email" name="email" class="w-full bg-[#0d1117] border <?= (!empty($data['email_err'])) ? 'border-brandRed' : 'border-[#30363d]' ?> text-white rounded-xl pr-10 pl-4 py-3 outline-none focus:border-brandPurple transition-colors" value="<?= $data['email']; ?>" placeholder="ninja@example.com">
+                    <input type="email" name="email" class="w-full bg-[#0d1117] border <?= (!empty($data['email_err'])) ? 'border-brandRed' : 'border-[#30363d]' ?> text-white rounded-xl pr-10 pl-4 py-3 outline-none focus:border-brandPurple transition-colors" value="<?= $data['email']; ?>" placeholder="knight@example.com">
                 </div>
                 <span class="text-brandRed text-sm mt-1 block"><?= $data['email_err']; ?></span>
             </div>
 
             <div class="mb-6">
-                <label class="block text-textSecondary font-bold mb-2">كلمة المرور</label>
+                <label class="block text-textSecondary font-bold mb-2"><?= __('password_label') ?></label>
                 <div class="relative">
                     <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -42,13 +42,13 @@
             </div>
 
             <button type="submit" class="w-full bg-brandGreen hover:bg-brandGreenHover text-white font-bold py-3 px-4 rounded-xl transition-colors shadow-lg shadow-brandGreen/20 mb-4 flex justify-center items-center gap-2">
-                دخول الساحة
+                <?= __('enter_arena') ?>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
                 </svg>
             </button>
 
-            <p class="text-center text-textSecondary">مقاتل جديد؟ <a href="<?= URLROOT; ?>/auth/register" class="text-brandGreen hover:text-white transition-colors">سجل هنا مجاناً</a></p>
+            <p class="text-center text-textSecondary"><?= __('new_knight') ?> <a href="<?= URLROOT; ?>/auth/register" class="text-brandGreen hover:text-white transition-colors"><?= __('register_here') ?></a></p>
         </form>
     </div>
 </div>
